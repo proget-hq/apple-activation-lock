@@ -1,0 +1,34 @@
+{
+    "name": "proget-hq/apple-activation-lock",
+    "description": "Library for generating Apple Activation Lock Bypass key and hash",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marcin Michalski",
+            "email": "marcin.michalski@proget.pl"
+        }
+    ],
+    "require": {
+        "ext-openssl": "*"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "phpunit/phpunit": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Proget\\Apple\\ActivationLock\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Proget\\Tests\\Apple\\ActivationLock\\": "tests/"
+        }
+    },
+    "scripts": {
+        "check-cs": "php-cs-fixer fix --dry-run",
+        "fix-cs": "php-cs-fixer fix",
+        "test": "phpunit"
+    }
+}
