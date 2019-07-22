@@ -5,7 +5,7 @@ Library for generating Apple [Activation Lock Bypass](https://developer.apple.co
 ## Install
 
 ```
-composer require proget-hq/apple-activation-token
+composer require proget-hq/apple-activation-lock
 ```
 
 ## Usage
