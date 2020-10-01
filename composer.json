@@ -13,7 +13,7 @@
         "ext-openssl": "*"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.15",
+        "friendsofphp/php-cs-fixer": "^2.16",
         "phpunit/phpunit": "^8.2"
     },
     "autoload": {
@@ -29,6 +29,9 @@
     "scripts": {
         "check-cs": "php-cs-fixer fix --dry-run",
         "fix-cs": "php-cs-fixer fix",
-        "test": "phpunit"
+        "tests": [
+            "@check-cs",
+            "phpunit"
+        ]
     }
 }
