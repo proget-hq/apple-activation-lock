@@ -14,7 +14,9 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
-        "phpunit/phpunit": "^8.2"
+        "phpunit/phpunit": "^8.2",
+        "phpstan/phpstan": "^0.12.47",
+        "phpstan/phpstan-phpunit": "^0.12.16"
     },
     "autoload": {
         "psr-4": {
@@ -29,8 +31,10 @@
     "scripts": {
         "check-cs": "php-cs-fixer fix --dry-run",
         "fix-cs": "php-cs-fixer fix",
+        "sca": "phpstan analyse",
         "tests": [
             "@check-cs",
+            "@sca",
             "phpunit"
         ]
     }
