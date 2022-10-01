@@ -16,6 +16,6 @@ class ActivationLockRandomBytesGenerator
             throw ActivationLockException::couldNotGenerateRandomBytes();
         }
 
-        return Bytes::fromString($rawBytes);
+        return Bytes::fromString((string) $rawBytes);
     }
 }

@@ -1,21 +1,48 @@
-name: tests
-on: [push,pull_request]
+name: "Build"
+
+on:
+  push:
+    branches: [master]
+
+  pull_request:
+
 jobs:
   build:
+    name: PHP ${{ matrix.php }}
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: true
+      max-parallel: 8
+      matrix:
+        php:
+          - "7.4"
+          - "8.0"
+          - "8.1"
+
     steps:
-        - uses: actions/checkout@v1
-        - name: Get Composer Cache Directory
-          id: composer-cache
-          run: |
-            echo "::set-output name=dir::$(composer config cache-files-dir)"
-        - uses: actions/cache@v1
-          with:
-            path: ${{ steps.composer-cache.outputs.dir }}
-            key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-            restore-keys: |
-              ${{ runner.os }}-composer-
-        - name: Install dependencies
-          run: composer install
-        - name: Run tests
-          run: composer tests
+      - uses: actions/checkout@v3
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          coverage: "pcov"
+          php-version: "${{ matrix.php }}"
+          ini-values: memory_limit=-1
+
+      - name: "Install dependencies"
+        uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: "locked"
+
+      - name: "Validate composer files"
+        run: "composer validate"
+
+      - name: "Run code style check"
+        run: "composer check-cs"
+
+      - name: "Run PHPStan"
+        run: "composer sca"
+
+      - name: "Run tests"
+        run: "composer tests"
