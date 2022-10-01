@@ -10,8 +10,9 @@ class ActivationLockRandomBytesGenerator
 
     public function generate(): Bytes
     {
-        $rawBytes = \openssl_random_pseudo_bytes(self::RANDOM_BYTES_LENGTH);
-        if ($rawBytes === false) {
+        try {
+            $rawBytes = \openssl_random_pseudo_bytes(self::RANDOM_BYTES_LENGTH);
+        } catch (\Exception $e) {
             throw ActivationLockException::couldNotGenerateRandomBytes();
         }
 
