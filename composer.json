@@ -29,11 +29,17 @@
             "Proget\\Tests\\Apple\\ActivationLock\\": "tests/"
         }
     },
+    "config": {
+        "platform": {
+            "php": "7.4.30"
+        }
+    },
     "scripts": {
         "check-cs": "php-cs-fixer fix --dry-run",
         "fix-cs": "php-cs-fixer fix",
         "sca": "phpstan analyse",
-        "tests": [
+        "tests": "phpunit",
+        "ci": [
             "@check-cs",
             "@sca",
             "phpunit"
