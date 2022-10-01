@@ -11,8 +11,8 @@ final class ActivationLockException extends \Exception
         return new self(\sprintf('Byte index %d out of bounds', $index));
     }
 
-    public static function couldNotGenerateRandomBytes(): self
+    public static function couldNotGenerateRandomBytes(?\Throwable $dueTo = null): self
     {
-        return new self('Could not generate random bytes');
+        return new self('Could not generate random bytes', 0, $dueTo);
     }
 }
